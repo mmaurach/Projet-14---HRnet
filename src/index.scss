@@ -1,0 +1,15 @@
+$primary: #2e7d32;
+$primary-light: #e8f5e9;
+$primary-dark: #1b5e20;
+
+$background: #f4f6f5;
+$card-bg: #ffffff;
+$text: #1f2937;
+$border: #e5e7eb;
+
+body {
+  margin: 0;
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background-color: $background;
+  color: $text;
+}

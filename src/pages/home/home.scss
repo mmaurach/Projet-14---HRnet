@@ -1,0 +1,101 @@
+$primary: #2e7d32;
+$primary-light: #e8f5e9;
+$primary-dark: #1b5e20;
+
+$background: #f4f6f5;
+$card-bg: #ffffff;
+$text: #1f2937;
+$border: #e5e7eb;
+
+.container {
+  max-width: 720px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: $card-bg;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  background: linear-gradient(135deg, $primary, $primary-dark);
+  color: white;
+  padding: 2rem;
+  text-align: center;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  h1 {
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+a {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: $primary;
+  text-decoration: none;
+  font-weight: 500;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 1.2rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+input,
+select {
+  padding: 0.7rem;
+  border: 1px solid $border;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+
+  &:focus {
+    border-color: $primary;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15);
+  }
+}
+
+fieldset.address {
+  margin-top: 1.8rem;
+  padding: 1.2rem;
+  border: 1px solid $border;
+  border-radius: 10px;
+
+  legend {
+    padding: 0 0.5rem;
+    color: $primary-dark;
+    font-weight: 600;
+  }
+}
+
+button {
+  margin-top: 2rem;
+  padding: 0.9rem;
+  background: linear-gradient(135deg, $primary, $primary-dark);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  }
+}
