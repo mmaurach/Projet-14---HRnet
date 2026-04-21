@@ -1,5 +1,10 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import Select from "react-select";
+import states from "../../data/states";
+import departments from "../../data/departements";
 
 import "./home.scss";
 
@@ -7,8 +12,8 @@ function Home() {
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
-    dateOfBirth: "",
-    startDate: "",
+    dateOfBirth: null,
+    startDate: null,
     street: "",
     city: "",
     state: "",
@@ -25,6 +30,24 @@ function Home() {
     }));
   };
 
+  const handleValueChange = (name, value) => {
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleZipChange = (e) => {
+    const value = e.target.value;
+
+    if (/^\d{0,5}$/.test(value)) {
+      setForm((prev) => ({
+        ...prev,
+        zipCode: value,
+      }));
+    }
+  };
+  console.log(form);
   return (
     <div>
       <div className="title">
@@ -52,22 +75,31 @@ function Home() {
             value={form.lastName}
             onChange={handleChange}
           />
-          <label htmlFor="date-of-birth">Date of Birth</label>
-          <input
-            type="text"
-            id="date-of-birth"
-            name="dateOfBirth"
-            value={form.dateOfBirth}
-            onChange={handleChange}
+          <label>Date of Birth</label>
+
+          <DatePicker
+            selected={form.dateOfBirth}
+            onChange={(date) => handleValueChange("dateOfBirth", date)}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select a date"
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
+            maxDate={new Date()}
           />
-          <label htmlFor="start-date">Start Date</label>
-          <input
-            type="text"
-            id="start-date"
-            name="startDate"
-            value={form.startDate}
-            onChange={handleChange}
+
+          <label>Date of Start</label>
+
+          <DatePicker
+            selected={form.startDate}
+            onChange={(date) => handleValueChange("startDate", date)}
+            dateFormat="dd/MM/yyyy"
+            placeholderText="Select a date"
+            showMonthDropdown
+            showYearDropdown
+            dropdownMode="select"
           />
+
           <fieldset className="address">
             <legend>Address</legend>
 
@@ -89,32 +121,40 @@ function Home() {
               onChange={handleChange}
             />
 
-            <label htmlFor="state">State</label>
-            <select id="state"></select>
+            <label>State</label>
+
+            <Select
+              options={states}
+              onChange={(selected) =>
+                setForm({ ...form, state: selected.value })
+              }
+              placeholder="Select a state"
+            />
 
             <label htmlFor="zip-code">Zip Code</label>
             <input
               type="text"
-              id="zip-code"
+              id="zipCode"
               name="zipCode"
               value={form.zipCode}
-              onChange={handleChange}
+              onChange={handleZipChange}
+              maxLength={5}
+              inputMode="numeric"
             />
           </fieldset>
-          <label htmlFor="department">Department</label>
-          <select
-            id="department"
-            name="department"
-            value={form.department}
-            onChange={handleChange}
-          >
-            <option value="">Select</option>
-            <option value="Sales">Sales</option>
-            <option value="Marketing">Marketing</option>
-            <option value="Engineering">Engineering</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Legal">Legal</option>
-          </select>
+          <label>Department</label>
+
+          <Select
+            options={departments}
+            placeholder="Select department"
+            value={departments.find((item) => item.value === form.department)}
+            onChange={(selected) =>
+              setForm((prev) => ({
+                ...prev,
+                department: selected.value,
+              }))
+            }
+          />
         </form>
 
         <button>Save</button>
