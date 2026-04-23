@@ -47,7 +47,7 @@ function Home() {
       }));
     }
   };
-  console.log(form);
+
   return (
     <div>
       <div className="title">
