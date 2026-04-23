@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import states from "../../data/states";
 import departments from "../../data/departements";
+import Modal from "../../components/modal/modal";
 
 import "./home.scss";
 
@@ -20,6 +21,8 @@ function Home() {
     zipCode: "",
     department: "",
   });
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -157,7 +160,13 @@ function Home() {
           />
         </form>
 
-        <button>Save</button>
+        <button type="button" onClick={() => setIsModalOpen(true)}>
+          Save
+        </button>
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+          <h3>Employee Created!</h3>
+          <p>The employee has been added successfully.</p>
+        </Modal>
       </div>
     </div>
   );
