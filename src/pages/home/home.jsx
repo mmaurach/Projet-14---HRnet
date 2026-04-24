@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import states from "../../data/states";
 import departments from "../../data/departements";
 import Modal from "../../components/modal/modal";
+import { addEmployee } from "../../store/employeesSlice";
 
 import "./home.scss";
 
 function Home() {
-  const [form, setForm] = useState({
+  const initialForm = {
     firstName: "",
     lastName: "",
     dateOfBirth: null,
@@ -20,9 +22,11 @@ function Home() {
     state: "",
     zipCode: "",
     department: "",
-  });
+  };
 
+  const [form, setForm] = useState(initialForm);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -51,6 +55,24 @@ function Home() {
     }
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const newEmployee = {
+      ...form,
+      id: crypto.randomUUID(),
+
+      dateOfBirth: form.dateOfBirth ? form.dateOfBirth.toISOString() : null,
+
+      startDate: form.startDate ? form.startDate.toISOString() : null,
+    };
+
+    dispatch(addEmployee(newEmployee));
+
+    setIsModalOpen(true);
+    setForm(initialForm);
+  };
+
   return (
     <div>
       <div className="title">
@@ -61,7 +83,7 @@ function Home() {
         <a href="/employees">View Current Employees</a>
         <h2>Create Employee</h2>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <label htmlFor="first-name">First Name</label>
           <input
             type="text"
@@ -158,11 +180,8 @@ function Home() {
               }))
             }
           />
+          <button type="submit">Save</button>
         </form>
-
-        <button type="button" onClick={() => setIsModalOpen(true)}>
-          Save
-        </button>
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
           <h3>Employee Created!</h3>
           <p>The employee has been added successfully.</p>
