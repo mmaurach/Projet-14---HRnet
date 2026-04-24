@@ -58,6 +58,21 @@ function Home() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if (
+      !form.firstName ||
+      !form.lastName ||
+      !form.dateOfBirth ||
+      !form.startDate ||
+      !form.street ||
+      !form.city ||
+      !form.state ||
+      !form.zipCode ||
+      !form.department
+    ) {
+      alert("Please fill in all required fields.");
+      return;
+    }
+
     const newEmployee = {
       ...form,
       id: crypto.randomUUID(),
@@ -91,6 +106,7 @@ function Home() {
             name="firstName"
             value={form.firstName}
             onChange={handleChange}
+            required
           />
           <label htmlFor="last-name">Last Name</label>
           <input
@@ -99,6 +115,7 @@ function Home() {
             name="lastName"
             value={form.lastName}
             onChange={handleChange}
+            required
           />
           <label>Date of Birth</label>
 
@@ -111,6 +128,7 @@ function Home() {
             showYearDropdown
             dropdownMode="select"
             maxDate={new Date()}
+            required
           />
 
           <label>Date of Start</label>
@@ -123,6 +141,7 @@ function Home() {
             showMonthDropdown
             showYearDropdown
             dropdownMode="select"
+            required
           />
 
           <fieldset className="address">
@@ -135,6 +154,7 @@ function Home() {
               name="street"
               value={form.street}
               onChange={handleChange}
+              required
             />
 
             <label htmlFor="city">City</label>
@@ -144,6 +164,7 @@ function Home() {
               name="city"
               value={form.city}
               onChange={handleChange}
+              required
             />
 
             <label>State</label>
@@ -154,6 +175,7 @@ function Home() {
                 setForm({ ...form, state: selected.value })
               }
               placeholder="Select a state"
+              required
             />
 
             <label htmlFor="zip-code">Zip Code</label>
@@ -165,6 +187,7 @@ function Home() {
               onChange={handleZipChange}
               maxLength={5}
               inputMode="numeric"
+              required
             />
           </fieldset>
           <label>Department</label>
@@ -179,12 +202,33 @@ function Home() {
                 department: selected.value,
               }))
             }
+            required
           />
           <button type="submit">Save</button>
         </form>
-        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          <h3>Employee Created!</h3>
-          <p>The employee has been added successfully.</p>
+        <Modal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          title="Employee Created"
+          width="460px"
+          bgColor="#ffffff"
+          textColor="#4b5563"
+          titleColor="#2e7d32"
+          fontSize="16px"
+          borderRadius="18px"
+          closeOnOverlay={true}
+          closeOnEscape={true}
+          showCloseButton={true}
+          footer={
+            <button
+              className="modal-action-btn"
+              onClick={() => setIsModalOpen(false)}
+            >
+              Close
+            </button>
+          }
+        >
+          <p>The new employee has been successfully added to the system.</p>
         </Modal>
       </div>
     </div>
