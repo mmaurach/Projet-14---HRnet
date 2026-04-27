@@ -6,7 +6,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import Select from "react-select";
 import states from "../../data/states";
 import departments from "../../data/departements";
-import Modal from "../../components/modal/modal";
+// import Modal from "../../components/modal/modal";
+import Modal from "maxom-modal";
 import { addEmployee } from "../../store/employeesSlice";
 
 import "./home.scss";
