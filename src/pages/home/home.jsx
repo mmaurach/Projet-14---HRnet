@@ -9,6 +9,7 @@ import departments from "../../data/departements";
 // import Modal from "../../components/modal/modal";
 import Modal from "maxom-modal";
 import { addEmployee } from "../../store/employeesSlice";
+import Header from "../../components/header/header";
 
 import "./home.scss";
 
@@ -90,15 +91,8 @@ function Home() {
   };
 
   return (
-    <div>
-      <div className="title">
-        <h1>HRnet</h1>
-      </div>
-
-      <div className="container">
-        <a href="/employees">View Current Employees</a>
-        <h2>Create Employee</h2>
-
+    <>
+      <main className="container">
         <form onSubmit={handleSubmit}>
           <label htmlFor="first-name">First Name</label>
           <input
@@ -231,8 +225,8 @@ function Home() {
         >
           <p>The new employee has been successfully added to the system.</p>
         </Modal>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
 

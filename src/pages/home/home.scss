@@ -9,38 +9,11 @@ $border: #e5e7eb;
 
 .container {
   max-width: 720px;
-  margin: 3rem auto;
+  margin: 2rem auto;
   padding: 2rem;
   background: $card-bg;
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
-}
-
-.title {
-  background: linear-gradient(135deg, $primary, $primary-dark);
-  color: white;
-  padding: 2rem;
-  text-align: center;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-
-  h1 {
-    margin: 0;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-  }
-}
-
-a {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  color: $primary;
-  text-decoration: none;
-  font-weight: 500;
-
-  &:hover {
-    text-decoration: underline;
-  }
 }
 
 form {
