@@ -91,142 +91,138 @@ function Home() {
   };
 
   return (
-    <>
-      <main className="container">
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="first-name">First Name</label>
+    <main className="container">
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="first-name">First Name</label>
+        <input
+          type="text"
+          id="first-name"
+          name="firstName"
+          value={form.firstName}
+          onChange={handleChange}
+          required
+        />
+        <label htmlFor="last-name">Last Name</label>
+        <input
+          type="text"
+          id="last-name"
+          name="lastName"
+          value={form.lastName}
+          onChange={handleChange}
+          required
+        />
+        <label>Date of Birth</label>
+
+        <DatePicker
+          selected={form.dateOfBirth}
+          onChange={(date) => handleValueChange("dateOfBirth", date)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select a date"
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+          maxDate={new Date()}
+          required
+        />
+
+        <label>Date of Start</label>
+
+        <DatePicker
+          selected={form.startDate}
+          onChange={(date) => handleValueChange("startDate", date)}
+          dateFormat="dd/MM/yyyy"
+          placeholderText="Select a date"
+          showMonthDropdown
+          showYearDropdown
+          dropdownMode="select"
+          required
+        />
+
+        <fieldset className="address">
+          <legend>Address</legend>
+
+          <label htmlFor="street">Street</label>
           <input
             type="text"
-            id="first-name"
-            name="firstName"
-            value={form.firstName}
+            id="street"
+            name="street"
+            value={form.street}
             onChange={handleChange}
             required
           />
-          <label htmlFor="last-name">Last Name</label>
+
+          <label htmlFor="city">City</label>
           <input
             type="text"
-            id="last-name"
-            name="lastName"
-            value={form.lastName}
+            id="city"
+            name="city"
+            value={form.city}
             onChange={handleChange}
             required
           />
-          <label>Date of Birth</label>
 
-          <DatePicker
-            selected={form.dateOfBirth}
-            onChange={(date) => handleValueChange("dateOfBirth", date)}
-            dateFormat="dd/MM/yyyy"
-            placeholderText="Select a date"
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            maxDate={new Date()}
-            required
-          />
-
-          <label>Date of Start</label>
-
-          <DatePicker
-            selected={form.startDate}
-            onChange={(date) => handleValueChange("startDate", date)}
-            dateFormat="dd/MM/yyyy"
-            placeholderText="Select a date"
-            showMonthDropdown
-            showYearDropdown
-            dropdownMode="select"
-            required
-          />
-
-          <fieldset className="address">
-            <legend>Address</legend>
-
-            <label htmlFor="street">Street</label>
-            <input
-              type="text"
-              id="street"
-              name="street"
-              value={form.street}
-              onChange={handleChange}
-              required
-            />
-
-            <label htmlFor="city">City</label>
-            <input
-              type="text"
-              id="city"
-              name="city"
-              value={form.city}
-              onChange={handleChange}
-              required
-            />
-
-            <label>State</label>
-
-            <Select
-              options={states}
-              onChange={(selected) =>
-                setForm({ ...form, state: selected.value })
-              }
-              placeholder="Select a state"
-              required
-            />
-
-            <label htmlFor="zip-code">Zip Code</label>
-            <input
-              type="text"
-              id="zipCode"
-              name="zipCode"
-              value={form.zipCode}
-              onChange={handleZipChange}
-              maxLength={5}
-              inputMode="numeric"
-              required
-            />
-          </fieldset>
-          <label>Department</label>
+          <label>State</label>
 
           <Select
-            options={departments}
-            placeholder="Select department"
-            value={departments.find((item) => item.value === form.department)}
-            onChange={(selected) =>
-              setForm((prev) => ({
-                ...prev,
-                department: selected.value,
-              }))
-            }
+            options={states}
+            onChange={(selected) => setForm({ ...form, state: selected.value })}
+            placeholder="Select a state"
             required
           />
-          <button type="submit">Save</button>
-        </form>
-        <Modal
-          isOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          title="Employee Created"
-          width="460px"
-          bgColor="#ffffff"
-          textColor="#4b5563"
-          titleColor="#2e7d32"
-          fontSize="16px"
-          borderRadius="18px"
-          closeOnOverlay={true}
-          closeOnEscape={true}
-          showCloseButton={true}
-          footer={
-            <button
-              className="modal-action-btn"
-              onClick={() => setIsModalOpen(false)}
-            >
-              Close
-            </button>
+
+          <label htmlFor="zip-code">Zip Code</label>
+          <input
+            type="text"
+            id="zipCode"
+            name="zipCode"
+            value={form.zipCode}
+            onChange={handleZipChange}
+            maxLength={5}
+            inputMode="numeric"
+            required
+          />
+        </fieldset>
+        <label>Department</label>
+
+        <Select
+          options={departments}
+          placeholder="Select department"
+          value={departments.find((item) => item.value === form.department)}
+          onChange={(selected) =>
+            setForm((prev) => ({
+              ...prev,
+              department: selected.value,
+            }))
           }
-        >
-          <p>The new employee has been successfully added to the system.</p>
-        </Modal>
-      </main>
-    </>
+          required
+        />
+        <button type="submit">Save</button>
+      </form>
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title="Employee Created"
+        width="460px"
+        bgColor="#ffffff"
+        textColor="#4b5563"
+        titleColor="#2e7d32"
+        fontSize="16px"
+        borderRadius="18px"
+        closeOnOverlay={true}
+        closeOnEscape={true}
+        showCloseButton={true}
+        footer={
+          <button
+            className="modal-action-btn"
+            onClick={() => setIsModalOpen(false)}
+          >
+            Close
+          </button>
+        }
+      >
+        <p>The new employee has been successfully added to the system.</p>
+      </Modal>
+    </main>
   );
 }
 
