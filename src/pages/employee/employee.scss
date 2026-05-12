@@ -36,3 +36,29 @@
   color: #6b7280;
   font-style: italic;
 }
+
+.pagination-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+
+  button {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: white;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  button:hover {
+    background: #f3f4f6;
+  }
+
+  span {
+    font-weight: 600;
+    color: #374151;
+  }
+}
